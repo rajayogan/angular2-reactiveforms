@@ -1,3 +1,18 @@
-<h1>
-  {{title}}
-</h1>
+<form novalidate (ngSubmit)="onSubmit(contactinfo)" [formGroup]="contactinfo">
+  <input type="text" placeholder="name" formControlName="name">
+  <div *ngIf="contactinfo.get('name').hasError('required') && contactinfo.get('name').touched">
+    Name is a required field
+    </div>
+    <div *ngIf="contactinfo.get('name').hasError('minlength') && contactinfo.get('name').touched">
+    Name should be minimum 4 characters
+    </div>
+  <input type="text" placeholder="mobileno" formControlName="contactno">  
+    <div *ngIf="contactinfo.get('contactno').hasError('required') && contactinfo.get('contactno').touched">
+    Number is a required field
+    </div>
+    <div *ngIf="contactinfo.get('contactno').hasError('minlength') && contactinfo.get('contactno').touched">
+    Number should be minimum 7 characters
+    </div> 
+  <button type="submit" [disabled]="contactinfo.invalid">Add</button>
+</form>
+  
